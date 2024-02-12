@@ -21,4 +21,28 @@ const addTask = (req, res) => {
   });
 };
 
-module.exports = { getAllTasks, addTask };
+const updateTaskStatus = (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  Task.updateTaskStatus(id, status, (err) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.json({ "message": "success", "id": id, "status": status });
+  });
+};
+
+const deleteTask = (req, res) => {
+  const { id } = req.params;
+  Task.deleteTask(id, (err) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.json({ "message": "deleted", "id": id });
+  });
+};
+
+
+module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask };

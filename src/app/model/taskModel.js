@@ -16,4 +16,18 @@ function addTask(task, callback) {
   });
 }
 
-module.exports = { getAllTasks, addTask };
+function updateTaskStatus(id, status, callback) {
+  const sql = 'UPDATE kanban_tasks SET status = ? WHERE id = ?';
+  db.run(sql, [status, id], function (err) {
+    callback(err);
+  });
+}
+
+function deleteTask(id, callback) {
+  const sql = 'DELETE FROM kanban_tasks WHERE id = ?';
+  db.run(sql, id, function (err) {
+    callback(err);
+  });
+}
+
+module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask };
