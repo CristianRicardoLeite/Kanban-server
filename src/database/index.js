@@ -12,7 +12,7 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
   db.run(`CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    status TEXT NOT NULL,
+    status TEXT CHECK(status IN ('To Do', 'Doing', 'Ready')) NOT NULL DEFAULT 'To Do',
     dueDate TEXT
   )`, (err) => {
     if (err) {

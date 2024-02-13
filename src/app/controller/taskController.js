@@ -1,4 +1,3 @@
-// controllers/taskController.js
 const Task = require('../model/taskModel');
 
 const getAllTasks = (req, res) => {
