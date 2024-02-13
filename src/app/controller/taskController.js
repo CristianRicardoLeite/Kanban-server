@@ -21,6 +21,8 @@ const addTask = (req, res) => {
 };
 
 const updateTaskStatus = (req, res) => {
+
+
   const { id } = req.params;
   const { status } = req.body;
   Task.updateTaskStatus(id, status, (err) => {
