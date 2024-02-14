@@ -49,6 +49,8 @@ const searchTasks = (req, res) => {
     if (err) {
       res.status(500).send({ message: "Erro ao buscar tarefas", error: err.message });
     } else {
+
+      console.log(tasks)
       res.status(200).send({ message: "Tarefas encontradas", data: tasks });
     }
   })
