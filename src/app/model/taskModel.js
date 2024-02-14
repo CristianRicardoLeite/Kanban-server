@@ -45,15 +45,25 @@ function deleteTask(id, callback) {
   });
 }
 
-function searchTasks(query, callback) {
-  const sql = "SELECT * FROM tasks WHERE name LIKE ?";
-  const params = [`%${query}%`];
+function searchTasks(queryJson, callback) {
+  let searchTerms;
+  try {
+    searchTerms = JSON.parse(queryJson);
+    if (!Array.isArray(searchTerms)) {
+      searchTerms = [searchTerms];
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  let whereClause = searchTerms.map(term => `name LIKE ?`).join(' OR ');
+  let params = searchTerms.map(term => `%${term}%`);
+
+  const sql = `SELECT * FROM tasks WHERE ${whereClause}`;
 
   db.all(sql, params, (err, rows) => {
     callback(err, rows);
   });
-
-};
+}
 
 
 module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask, searchTasks };
