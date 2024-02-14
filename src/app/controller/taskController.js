@@ -11,6 +11,8 @@ const getAllTasks = (req, res) => {
 };
 
 const addTask = (req, res) => {
+
+  console.log(req.body)
   Task.addTask(req.body, (err, task) => {
     if (err) {
       res.status(400).json({ "error": err.message });
@@ -21,8 +23,6 @@ const addTask = (req, res) => {
 };
 
 const updateTaskStatus = (req, res) => {
-
-
   const { id } = req.params;
   const { status } = req.body;
   Task.updateTaskStatus(id, status, (err) => {
@@ -44,6 +44,5 @@ const deleteTask = (req, res) => {
     res.json({ "message": "deleted", "id": id });
   });
 };
-
 
 module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask };

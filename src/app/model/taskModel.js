@@ -2,7 +2,7 @@
 const db = require('../../database');
 
 function getAllTasks(callback) {
-  const sql = "SELECT * FROM tasks";
+  const sql = 'SELECT * FROM tasks ORDER BY dueDate ASC'
   db.all(sql, [], (err, rows) => {
     callback(err, rows);
   });
