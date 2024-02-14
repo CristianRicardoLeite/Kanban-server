@@ -21,7 +21,7 @@ npm install
 <br/>
 <h3>Para iniciar o servidor</h3>
 <br/>
-npm run dev
+**npm run dev** <br/>
 A API estará disponível em http://localhost:3001.
 <br/>
 <h3>Contribuição</h3>
