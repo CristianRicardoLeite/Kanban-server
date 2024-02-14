@@ -1,8 +1,10 @@
-<h1 align="center">**Aplicativo Kanban Back-end**</h1>
-API Rest para um aplicativo Kanban, permitindo criar, mover, e excluir tarefas, além de interagir com o banco de dados.**
+<h1 align="center"> Aplicativo Kanban Back-end </h1>
+API Rest para um aplicativo Kanban, permitindo criar, mover, e excluir tarefas, além de interagir com o banco de dados.
 
 **Descrição**
 Este projeto é o back-end para um aplicativo Kanban. Ele fornece a API necessária para o gerenciamento de tarefas, incluindo adição, atualização e remoção de tarefas do banco de dados.
+
+
 
 **Funcionalidades**
 API Restful: Suporte para operações CRUD nas tarefas.
