@@ -11,8 +11,6 @@ const getAllTasks = (req, res) => {
 };
 
 const addTask = (req, res) => {
-
-  console.log(req.body)
   Task.addTask(req.body, (err, task) => {
     if (err) {
       res.status(400).json({ "error": err.message });
@@ -45,4 +43,15 @@ const deleteTask = (req, res) => {
   });
 };
 
-module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask };
+const searchTasks = (req, res) => {
+  const { query } = req.query;
+  Task.searchTasks(query, (err, tasks) => {
+    if (err) {
+      res.status(500).send({ message: "Erro ao buscar tarefas", error: err.message });
+    } else {
+      res.status(200).send({ message: "Tarefas encontradas", data: tasks });
+    }
+  })
+};
+
+module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask, searchTasks };

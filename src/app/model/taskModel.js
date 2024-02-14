@@ -1,13 +1,23 @@
-// models/taskModel.js
 const db = require('../../database');
 
 function getAllTasks(callback) {
-  const sql = 'SELECT * FROM tasks ORDER BY dueDate ASC'
+  const sql = 'SELECT * FROM tasks ORDER BY status ASC, dueDate ASC';
   db.all(sql, [], (err, rows) => {
-    callback(err, rows);
+    if (err) {
+      callback(err, null);
+      return;
+    }
+    rows.sort((a, b) => {
+      if (a.status !== b.status) {
+        return a.status - b.status;
+      } else {
+        return new Date(a.dueDate) - new Date(b.dueDate);
+      }
+    });
+
+    callback(null, rows);
   });
 }
-
 function addTask(task, callback) {
   const { name, status, dueDate } = task;
 
@@ -35,4 +45,15 @@ function deleteTask(id, callback) {
   });
 }
 
-module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask };
+function searchTasks(query, callback) {
+  const sql = "SELECT * FROM tasks WHERE name LIKE ?";
+  const params = [`%${query}%`];
+
+  db.all(sql, params, (err, rows) => {
+    callback(err, rows);
+  });
+
+};
+
+
+module.exports = { getAllTasks, addTask, updateTaskStatus, deleteTask, searchTasks };
